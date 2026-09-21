@@ -1,0 +1,16 @@
+<h1>Tasks</h1>
+
+<ul style="list-style: none; padding: 0;>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= form_with url: toggle_task_path(task), method: :patch, html: { style: "display: inline" } do %>
+        <%= check_box_tag :completed, 1, task.completed, onchange: "this.form.requestSubmit()" %>
+      <% end %>
+      <%= task.title %>
+      <%= button_to "Edit", edit_task_path(task), method: :get, form: { style: "display: inline" } %>
+      <%= button_to "Delete", task_path(task), method: :delete, form: { style: "display: inline" } %>
+    </li>
+  <% end %>
+</ul>
+
+<%= button_to "New Task", new_task_path, method: :get %>
