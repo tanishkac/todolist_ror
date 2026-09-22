@@ -1,6 +1,4 @@
-<h1>Tasks</h1>
-
-<ul style="list-style: none; padding: 0;>
+<ul style="list-style: none; padding: 0;">
   <% @tasks.each do |task| %>
     <li>
       <%= form_with url: toggle_task_path(task), method: :patch, html: { style: "display: inline" } do %>

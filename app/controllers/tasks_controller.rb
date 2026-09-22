@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.order(created_at: :asc)
   end
 
   def new
@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      redirect_to tasks_path
+      redirect_to tasks_path, notice: "Task created!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     
     if @task.update(task_params)
-      redirect_to tasks_path
+      redirect_to tasks_path, notice: "Task updated!"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,13 +35,13 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.destroy
 
-    redirect_to tasks_path
+    redirect_to tasks_path, notice: "Task deleted!"
   end
 
   def toggle
     @task = Task.find(params[:id])
     @task.update(completed: !@task.completed)
-    redirect_to tasks_path, status: :see_other
+    redirect_to tasks_path, notice: "Task updated!", status: :see_other
   end
 
   private

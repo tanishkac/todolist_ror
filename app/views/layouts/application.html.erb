@@ -24,6 +24,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>To Do List</h1>
+    </header>
+    <main>
+      <% if flash[:notice] %>
+        <p><%= flash[:notice] %></p>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
